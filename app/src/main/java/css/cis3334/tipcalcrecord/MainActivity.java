@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements updateViewInterface {
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements updateViewInterfa
     CheckBox cbService;
     RadioButton rb1, rb2, rb3;
     CalculatorInterface tipCalc;
+    RadioGroup rbGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +32,21 @@ public class MainActivity extends AppCompatActivity implements updateViewInterfa
         rb2 = (RadioButton) findViewById(R.id.radioButton2);
         rb3 = (RadioButton) findViewById(R.id.radioButton3);
         tipCalc = new TipCalculator(this);                  // instatiate the tip calculator
+        rbGroup = findViewById(R.id.rbGroup);
     }
 
     public void onClickButtonCalc(View view) {
         //This is a comment
         Double bill = Double.parseDouble( etBill.getText().toString() );
+
+
         int numPeople = 1;
         if (rb2.isChecked()) {
             numPeople = 2;
         } else if (rb3.isChecked()) {
             numPeople = 3;
         }
+
         tipCalc.calculate(bill, numPeople, cbService.isChecked());
     }
 
